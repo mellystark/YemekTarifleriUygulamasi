@@ -1,0 +1,16 @@
+﻿@model YemekTarifleriUygulamasi.Models.Recipe
+
+<h1>Edit Recipe</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div>
+        <label for="Title">Title</label>
+        <input type="text" id="Title" name="Title" value="@Model.Title" />
+    </div>
+    <div>
+        <label for="Description">Description</label>
+        <textarea id="Description" name="Description">@Model.Description</textarea>
+    </div>
+    <button type="submit">Save</button>
+</form>

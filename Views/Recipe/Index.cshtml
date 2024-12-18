@@ -1,0 +1,28 @@
+﻿@model IEnumerable<YemekTarifleriUygulamasi.Models.Recipe>
+
+<h1>Recipes</h1>
+<a href="@Url.Action("Create", "Recipe")">Create New Recipe</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in Model)
+        {
+            <tr>
+                <td>@recipe.Title</td>
+                <td>@recipe.Description</td>
+                <td>
+                    <a href="@Url.Action("Details", "Recipe", new { id = recipe.Id })">Details</a> |
+                    <a href="@Url.Action("Edit", "Recipe", new { id = recipe.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Recipe", new { id = recipe.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
