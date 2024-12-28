@@ -1,5 +1,18 @@
 ﻿@model YemekTarifleriUygulamasi.Models.Recipe
 
-<h1>@Model.Title</h1>
-<p>@Model.Description</p>
-<a href="@Url.Action("Index", "Recipe")">Back to List</a>
+<div class="container mt-5">
+    <h1>@Model.Title</h1>
+    <img src="@Model.ImagePath" alt="@Model.Title" class="img-fluid mb-4" style="max-height: 400px;" />
+
+    <h3>Tarif Açıklaması</h3>
+    <p>@Model.Description</p>
+
+    <h3>Malzemeler</h3>
+    <p>@Model.Ingredients</p>
+
+    <h3>Yapılışı</h3>
+    <p>@Model.Steps</p>
+
+    <h3>Kategori</h3>
+    <p>@Model.Category</p>
+</div>

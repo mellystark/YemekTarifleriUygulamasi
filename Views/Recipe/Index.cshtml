@@ -1,28 +1,46 @@
 ﻿@model IEnumerable<YemekTarifleriUygulamasi.Models.Recipe>
 
-<h1>Recipes</h1>
-<a href="@Url.Action("Create", "Recipe")">Create New Recipe</a>
+<h1>Tarif Listesi</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var recipe in Model)
-        {
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.Message
+    </div>
+}
+
+<!-- Yeni Tarif Ekleme Butonu -->
+<a href="@Url.Action("Create", "Recipe")" class="btn btn-success mb-3">Yeni Tarif Ekle</a>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@recipe.Title</td>
-                <td>@recipe.Description</td>
-                <td>
-                    <a href="@Url.Action("Details", "Recipe", new { id = recipe.Id })">Details</a> |
-                    <a href="@Url.Action("Edit", "Recipe", new { id = recipe.Id })">Edit</a> |
-                    <a href="@Url.Action("Delete", "Recipe", new { id = recipe.Id })">Delete</a>
-                </td>
+                <th>ID</th>
+                <th>Ad</th>
+                <th>Açıklama</th>
+                <th>İşlemler</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var recipe in Model)
+            {
+                <tr>
+                    <td>@recipe.Id</td>
+                    <td>@recipe.Title</td>
+                    <td>@recipe.Description</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Recipe", new { id = recipe.Id })">Detaylar</a>
+                        <a href="@Url.Action("Edit", "Recipe", new { id = recipe.Id })">Düzenle</a>
+                        <a href="@Url.Action("Delete", "Recipe", new { id = recipe.Id })">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Henüz tarif eklenmedi.</p>
+}
