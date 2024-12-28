@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using YemekTarifleriUygulamasi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,12 +7,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
 // Configure database connection
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add authentication services
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; // Buradaki þema ismini direkt kullanýyoruz
+})
+.AddCookie(options =>
+{
+    options.LoginPath = "/Account/Login"; // Giriþ sayfasýna yönlendirme
+    options.LogoutPath = "/Account/Logout"; // Çýkýþ sayfasýna yönlendirme
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Yetki reddedilen sayfa
+});
 
+// Add authorization services
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -19,7 +32,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -28,10 +40,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+// Authentication and Authorization middleware
+app.UseAuthentication(); // Kimlik doðrulama
+app.UseAuthorization();  // Yetkilendirme
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}"); // Varsayýlan sayfa
 
 app.Run();

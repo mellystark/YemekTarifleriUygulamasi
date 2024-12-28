@@ -1,26 +1,124 @@
 ﻿@model YemekTarifleriUygulamasi.Models.User
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Kayıt Ol";
 }
 
-<h2>Register</h2>
+<body class="page-background">
+    <div class="form-container">
+        <h2>Kayıt Ol</h2>
 
-<form asp-action="Register" method="post">
-    <div>
-        <label for="username">Username:</label>
-        <input asp-for="Username" id="username" class="form-control" required />
-        <span asp-validation-for="Username" class="text-danger"></span>
+        <form asp-action="Register" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Kullanıcı Adı:</label>
+                <input asp-for="Username" class="form-control input-text" id="username" required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Şifre:</label>
+                <div class="input-group">
+                    <input asp-for="Password" class="form-control input-text" id="password" type="password" required />
+                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                        <i class="bi bi-eye-slash" id="eyeIcon"></i>
+                    </button>
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-posta:</label>
+                <input asp-for="Email" class="form-control input-text" id="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </form>
+
+        <p class="login-link">Zaten bir hesabınız var mı? <a asp-controller="Account" asp-action="Login">Giriş Yap</a></p>
     </div>
-    <div>
-        <label for="password">Password:</label>
-        <input asp-for="Password" id="password" class="form-control" required />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input asp-for="Email" id="email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script> <!-- Bootstrap Icons Kütüphanesi -->
+
+<script>
+    // Şifreyi gösterip gizlemek için JavaScript kodu
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+        // Şifreyi göster ya da gizle
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+
+        // İkonu değiştir
+        eyeIcon.classList.toggle('bi-eye');
+        eyeIcon.classList.toggle('bi-eye-slash');
+    });
+</script>
+
+<style>
+    body.page-background {
+        background-color: #d3d3d3; /* Gri arka plan */
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffcc99; /* Daha açık turuncu kutu içi */
+        border: 3px solid #cc3333; /* Koyu kırmızı çerçeve ve kalın */
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center; /* Ortalamak için */
+    }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+
+    .login-link {
+        margin-top: 20px;
+        text-align: center; /* Ortalamak için */
+    }
+
+        .login-link a {
+            color: #cc3333; /* Koyu kırmızı renk */
+            text-decoration: none;
+        }
+
+            .login-link a:hover {
+                text-decoration: underline;
+            }
+
+    .input-text {
+        background-color: #ffffff; /* Beyaz arka plan */
+    }
+
+    /* Kullanıcı adı, şifre ve e-posta etiketlerini sola yasla */
+    .form-container label {
+        text-align: left;
+        display: block;
+    }
+
+    /* Şifreyi gizleyip gösterme butonunun stilini ayarlama */
+    .input-group {
+        position: relative;
+    }
+
+    #togglePassword {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Eye icon */
+    .bi-eye, .bi-eye-slash {
+        font-size: 18px;
+        color: #cc3333;
+    }
+</style>
