@@ -10,58 +10,60 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/YemekTarifleriUygulamasi.styles.css" asp-append-version="true" />
     <style>
-        /* Navbar ve arama kutusunu hizalamak için */
+        /* Navbar'ı sabit hale getirmek */
         .navbar {
-            position: relative;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #fff; /* Arka plan rengi, kayan içerikle kontrast oluşturur */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
+            padding: 10px 30px;
         }
 
+        /* Sayfa içeriğini navbar yüksekliğine göre hizalamak */
+        body,html {
+           
+            overflow-x: hidden; /* Yatay scroll'u kapatır */
+        }
+
+        /* Arama kutusu ve buton için düzenleme */
         .search-container {
-            position: absolute; /* Navbar'ın içinde sabit kalacak şekilde */
-            top: 100%; /* Navbar'ın hemen altına yerleştirir */
-            left: 0;
-            width: 100%;
             display: flex;
+            align-items: center;
             justify-content: center;
-            margin-top: 10px; /* Navbar ile arama kutusu arasında boşluk */
-            z-index: 1000; /* Navbar ile aynı hizada görünmesini sağlar */
+            gap: 10px; /* Buton ve kutu arasındaki mesafe */
         }
 
         .search-box {
             width: 150px; /* Başlangıçta küçük bir kutu */
-            padding: 10px;
+            max-width: 300px; /* Maksimum genişlik */
+            padding: 8px;
             font-size: 1rem;
             border-radius: 5px;
             border: 2px solid #ccc;
             outline: none;
-            transition: width 0.3s ease, padding 0.3s ease; /* Animasyonu burada ekliyoruz */
+            transition: width 0.3s ease; /* Genişleme animasyonu */
         }
 
             .search-box:focus {
-                opacity: 1;
-            }
-
-            /* 'active' sınıfı eklenince genişleyen kutu */
-            .search-box.active {
                 width: 300px; /* Tıklandığında genişler */
-                padding: 12px; /* Paddingi artırıyoruz */
+                border-color: #cc3333; /* Odaklandığında renk değişikliği */
             }
 
         .search-btn {
-            position: absolute;
-            top: 50%;
-            right: -35px;
-            transform: translateY(-50%);
-            background-color: #4CAF50;
+            background-color: #cc3333;
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 10px;
+            padding: 10px 15px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
         }
 
             .search-btn:hover {
-                background-color: #45a049;
+                background-color: #ffcc99;
             }
 
     </style>
@@ -105,9 +107,13 @@
             </div>
             <!-- Arama kutusu navbar'ın içinde -->
             <div class="search-container">
-                <input type="text" id="search-box" class="search-box" placeholder="Ara..." />
-                <button class="search-btn" onclick="toggleSearchBox()">🔍</button>
+                @if (ViewContext.RouteData.Values["controller"]?.ToString() != "Account")
+                {
+                    <input type="text" id="search-box" class="search-box" placeholder="Ara..." />
+                    <button class="search-btn" onclick="toggleSearchBox()">🔍</button>
+                }
             </div>
+
         </nav>
         <br /><br />
     </header>

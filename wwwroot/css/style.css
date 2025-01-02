@@ -93,7 +93,7 @@ Son Eklenenler bölümü */
 .show-more-btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #4CAF50; /* Buton arka plan rengi */
+    background-color: #cc3333; /* Buton arka plan rengi */
     color: #fff; /* Yazı rengi beyaz */
     font-size: 1.2rem;
     border-radius: 5px;
@@ -102,7 +102,10 @@ Son Eklenenler bölümü */
 }
 
     .show-more-btn:hover {
-        background-color: #45a049; /* Hover durumunda daha koyu yeşil */
+        background-color: #ffcc99; /* Hover durumunda daha koyu yeşil */
+        color: black;
+        text-decoration:none;
+        font-weight:bold;
     }
 
 
@@ -148,7 +151,7 @@ Son Eklenenler bölümü */
 
     .email-contact .send-btn {
         padding: 10px 15px;
-        background-color: #4CAF50;
+        background-color: #cc3333;
         border: none;
         color: white;
         border-radius: 5px;
@@ -157,7 +160,9 @@ Son Eklenenler bölümü */
     }
 
         .email-contact .send-btn:hover {
-            background-color: #45a049;
+            background-color: #ffcc99;
+            color:black;
+            font-weight:bold;
         }
 
 /* Sosyal medya ikonları */

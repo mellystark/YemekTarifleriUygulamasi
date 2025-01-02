@@ -1,7 +1,7 @@
 ﻿@model YemekTarifleriUygulamasi.Models.Recipe
 
-<div class="container mt-5">
-    <h1>Yeni Tarif Paylaş</h1>
+<div class="container mt-5"> 
+    <h1 style="text-align:center;">TARİFİNİ PAYLAŞ</h1>
     <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="Title">Tarif Adı</label>
@@ -34,6 +34,6 @@
             <input type="file" id="Image" name="Image" class="form-control" accept="image/*" />
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Tarifi Paylaş</button>
+            <span style="text-align:center;"> <button type="submit" class="btn btn-primary mt-3">Tarifi Paylaş</button></span>
     </form>
 </div>
